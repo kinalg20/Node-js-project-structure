@@ -20,12 +20,13 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
-  'GET  /get-userdata': { controller: 'BookController', action: 'getuserdata' },
+  'GET  /get-userdata': { controller: 'BookController', action: 'getuserdata'},
   'POST /create-user': { controller: 'BookController', action: 'Createnewuser' },
-  'POST /create-hotelier': { controller: 'BookController', action: 'Createnewhotelier' },
+  'POST /create-hotelier': { controller: 'BookController', action: 'Createnewhotelier'},
   'GET /get_user_by_id/:id': { controller: 'BookController', action: 'Getuserbyid' },
-  'PUT /update_user_by_id': { controller: 'BookController', action: 'updatebyuserid' },
-  'DELETE /delete_user_by_id/:id': { controller: 'BookController', action: 'deletebyuserid' }
+  'PUT /update_user_by_id': { controller: 'BookController', action: 'updatebyuserid'},
+  'DELETE /delete_user_by_id/:id': { controller: 'BookController', action: 'deletebyuserid'},
+  'POST /signup': { controller: 'ApicreationController', action: 'getuserdata'},
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *

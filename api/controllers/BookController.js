@@ -2,10 +2,16 @@ module.exports = {
     Createnewuser: async (req, res) => {
 
         let requestData = req.body;
-
+        fetchdata = await Book.find({ email: requestData.email })
         if (!requestData.first_name || !requestData.email || !requestData.last_name || !requestData.phonenumber) {
             return res.send({
                 msg: 'customer not created successfully',
+            })
+        }
+
+        if (fetchdata.length > 0) {
+            return res.send({
+                msg: 'email already exist',
             })
         }
 
@@ -48,7 +54,13 @@ module.exports = {
 
     getuserdata: async (req, res) => {
         data = await Book.find({});
-        // sails.log(data)
+        if (!data.length > 0) {
+            return res.send({
+                msg: 'data not found with this user',
+                responseCode: 201,
+                data: data
+            });
+        }
         return res.send({
             msg: 'Hotelier Customer fetched successfully',
             responseCode: 201,
@@ -59,9 +71,9 @@ module.exports = {
     Getuserbyid: async (req, res) => {
         data = req.params.id;
         fetchdatabyid = await Book.find({ id: data })
-        if (fetchdatabyid.length == 0) {
+        if (!fetchdatabyid.length > 0) {
             return res.send({
-                msg: 'data not found',
+                msg: 'user not exist',
             })
         }
         return res.send({
@@ -74,6 +86,11 @@ module.exports = {
     updatebyuserid: async (req, res) => {
         let userId = req.body.userId;
         fetcheddata = await Book.find({ id: userId });
+        if (!fetcheddata.length > 0) {
+            return res.send({
+                data:"user not exist",
+            })
+        }
         attributs = {};
         if (req.body.first_name) {
             attributs.first_name = req.body.first_name;
